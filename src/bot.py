@@ -51,69 +51,7 @@ async def shutdown(ctx):
     await asyncio.sleep(3)
     await client.change_presence(activity=discord.Activity(status=discord.Status.online, name="https://panel.chaoticdestiny.host",type=discord.ActivityType.watching))
     await asyncio.sleep(5)
-    await client.logout()
-
-@client.event
-async def on_member_join(member):
-    channelaa = client.get_channel(632331894532603915)
-    embed = discord.Embed(title='👋 Welcome!', description="Welcome, {} to {}!".format(member.mention, member.guild.name), colour=gold)
-    embed.set_author(name=member.name, icon_url=member.avatar_url)
-    embed.add_field(name="__Member__", value=member.name, inline=False)
-    embed.add_field(name="__User ID__", value=member.id, inline=False)
-    embed.add_field(name='__New Member Count__', value='{}'.format(str(member.guild.member_count)), inline=False)
-    embed.add_field(name="__Joined Discord__", value=member.created_at.strftime("%A, %B %d %Y @ %H:%M:%S %p"))
-    embed.add_field(name="__Rules__", value="Please read <#664917307855994912>", inline=False)
-    embed.add_field(name="__Verify__", value="Verify in <#704715255196024966>", inline=False)
-    embed.set_thumbnail(url=member.avatar_url)
-    await channelaa.send(embed=embed)
-    x = member.guild.get_role(610769312424394753)
-    y = member.guild.get_role(662695593638101071)
-    z = member.guild.get_role(662694754928295937)
-    await member.add_roles(y)
-    await member.add_roles(z)
-    await asyncio.sleep(10)
-    if "Free Customer" in [x.name for x in member.roles]:
-        for x in member.roles:
-             if x.name == "Free Customer":
-                 role1 = discord.utils.get(member.guild.roles, name='Deleted Server')
-                 await member.add_roles(role1)
-                 await member.add_roles(role0)
-                 role2 = discord.utils.get(member.guild.roles, name='Free Customer')
-                 await member.remove_roles(role2)
-                 role3 = discord.utils.get(member.guild.roles, name='Premium Customer')
-                 await member.remove_roles(role3)
-                 channel = client.get_channel(638106435645079553)
-                 await channel.send(f"{member.mention} rejoined, previously used to be Free Customers.")
-
-@client.event
-async def on_member_remove(member):
-    channel = client.get_channel(632331894532603915)
-    jd = member.joined_at
-    jd_month = jd.strftime("%b")
-    embed = discord.Embed(title='Goodbye :( 👋', description="Sad to see you go {}. We hope you come back!".format(member.mention), colour=red)
-    embed.set_author(name=member.name, icon_url=member.avatar_url)
-    embed.add_field(name="__User ID__", value=member.id, inline=False)
-    embed.add_field(name='__New Member Count__', value='{}'.format(str(member.guild.member_count)), inline=False)
-    embed.add_field(name="__Joined Chaotic Destiny__",value=f"{jd.day} {jd_month} {jd.year}", inline=False)
-    embed.set_thumbnail(url=member.avatar_url)
-    await channel.send(embed=embed)
-
-
-@commands.command()
-@commands.has_role("Server Creator")
-async def leaderboard(ctx):
-    arr = []
-    
-    guild = client.get_guild(610767680009535488)
-    for channel in guild.channels:
-        count = 0
-        async for message in channel.history():
-            count += 1
-        arr.append((message.author.id, count))
-    
-    
-        
-        
+    await client.logout()        
 
 def colour(r,g,b):
     return discord.Colour.from_rgb(r,g,b)
